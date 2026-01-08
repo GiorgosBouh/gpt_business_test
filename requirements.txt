@@ -1,2 +1,2 @@
-pytest>=8.2.0
 streamlit>=1.32.0
+pytest>=8.0.0

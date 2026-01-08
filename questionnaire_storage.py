@@ -1,8 +1,15 @@
-from questionnaire_storage import QuestionnaireStorage
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Dict, List
 
 
-def test_add_and_list_responses() -> None:
-    storage = QuestionnaireStorage()
-    storage.add_response({"name": "Ada"})
+@dataclass
+class QuestionnaireStorage:
+    responses: List[Dict[str, str]] = field(default_factory=list)
 
-    assert storage.list_responses() == [{"name": "Ada"}]
+    def add_response(self, response: Dict[str, str]) -> None:
+        self.responses.append(dict(response))
+
+    def list_responses(self) -> List[Dict[str, str]]:
+        return list(self.responses)
