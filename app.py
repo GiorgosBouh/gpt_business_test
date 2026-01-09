@@ -27,4 +27,4 @@ if submitted:
                 f"- **Newsletter:** {newsletter}",
             ]
         )
-    )
+    )    )
