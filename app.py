@@ -1,9 +1,13 @@
 import streamlit as st
 
+from questionnaire_storage import QuestionnaireStorage
+
 st.set_page_config(page_title="Questionnaire", page_icon="📝")
 
 st.title("Quick Questionnaire")
 st.write("Please answer all five questions and submit to see a summary of your responses.")
+
+storage = QuestionnaireStorage()
 
 with st.form("questionnaire_form"):
     name = st.text_input("1. What is your name?")
@@ -15,6 +19,15 @@ with st.form("questionnaire_form"):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
+    storage.add_response(
+        {
+            "name": name or "Not provided",
+            "role": role,
+            "experience": str(experience),
+            "favorite_tool": favorite_tool or "Not provided",
+            "newsletter": newsletter,
+        }
+    )
     st.subheader("Summary")
     st.write("Here are your responses:")
     st.markdown(
@@ -27,4 +40,4 @@ if submitted:
                 f"- **Newsletter:** {newsletter}",
             ]
         )
-    )    
+    )
